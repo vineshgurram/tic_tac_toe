@@ -11,11 +11,12 @@ const winningCombination = [
   [2, 4, 6],
 ];
 
-const moves = 8;
 const cells = document.querySelectorAll(".cell");
 const endMessage = document.getElementById("endMessage");
 const players = ["X", "O"];
 let currentPlayer = players[0];
+
+endMessage.textContent = `${currentPlayer}'s turn!`
 
 for (const cell of cells) {
   cell.addEventListener("click", function () {
@@ -28,21 +29,60 @@ for (const cell of cells) {
       endMessage.textContent = `Game over! ${currentPlayer} wins!`;
       return;
     }
-    currentPlayer = currentPlayer === "X" ? "O" : "X";
+
+    if (checkTie()) {
+      endMessage.textContent = `Game is tied!`;
+      return;
+    }
+
+    currentPlayer = currentPlayer === players[0] ? players[1] : players[0];
+
     if (currentPlayer == players[0]) {
-      endMessage.textContent = `X's turn!`;
+      endMessage.textContent = `${players[0]}'s turn!`;
     } else {
-      endMessage.textContent = `O's turn!`;
+      endMessage.textContent = `${players[1]}'s turn!`;
     }
   });
 }
 
 function checkWin(currentPlayer) {
-    for(let i = 0; i < winningCombination.length; i++){
-        const [a, b, c] = winningCombination[i]
-        if(cells[a].textContent === currentPlayer && cells[b].textContent === currentPlayer && cells[c].textContent === currentPlayer){
-            return true
-        }
+  for (let i = 0; i < winningCombination.length; i++) {
+    const [a, b, c] = winningCombination[i];
+    if (
+      cells[a].textContent === currentPlayer &&
+      cells[b].textContent === currentPlayer &&
+      cells[c].textContent === currentPlayer
+    ) {
+      return true;
     }
-    return false
+  }
+  return false;
 }
+
+function checkTie() {
+  for (let i = 0; i < cells.length; i++) {
+    if (cells[i].textContent === "") {
+      return false;
+    }
+  }
+  return true;
+}
+
+function restartGame(){
+  for (const cell of cells) {
+    cell.textContent = "";
+  }
+  currentPlayer = players[0];
+  endMessage.textContent = `${currentPlayer}'s turn!`;
+}
+
+
+const restartButton = document.getElementById("restartButton");
+
+restartButton.addEventListener("click",function(){
+  for (const cell of cells) {
+    cell.textContent = "";
+  }
+  currentPlayer = players[0];
+  endMessage.textContent = `${currentPlayer}'s turn!`;
+});

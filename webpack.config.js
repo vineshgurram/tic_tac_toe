@@ -1,12 +1,16 @@
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
-const Dotenv = require("dotenv-webpack");
+import path from "path";
+import { fileURLToPath } from "url";
+import HtmlWebpackPlugin from "html-webpack-plugin";
+import MiniCssExtractPlugin from "mini-css-extract-plugin";
+import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
+// import Dotenv from "dotenv-webpack"; // Uncomment if you use dotenv
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const isProd = process.env.NODE_ENV === "production";
 
-module.exports = {
+export default {
   entry: "./src/main.js",
   output: {
     filename: "main.js",
@@ -22,7 +26,7 @@ module.exports = {
           isProd ? MiniCssExtractPlugin.loader : "style-loader",
           "css-loader",
           "postcss-loader",
-          "sass-loader"
+          // remove sass-loader unless you're using SCSS
         ],
       },
       {
@@ -42,7 +46,7 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: "css/[name].[contenthash].css",
     }),
-    new Dotenv(),
+    // new Dotenv(), // Only if you're using .env
   ],
   devServer: {
     static: "./dist",
