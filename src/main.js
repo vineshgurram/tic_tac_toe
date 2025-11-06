@@ -1,4 +1,8 @@
 import "./assets/css/style.css";
+import { cells, mainMenuButton,endMessage,restartButton,resetScoreButton,startNewgameButton } from "./ui/uiElements";
+import { showNewGameScreen, showMainMenuScreen,showAppIntroScreen } from "./ui/uiController";
+import { resetScore,updateWinScore,updateDrawScore } from "./features/score";
+import { playersScore } from "./features/score";
 
 const winningCombination = [
   [0, 1, 2],
@@ -11,12 +15,10 @@ const winningCombination = [
   [2, 4, 6],
 ];
 
-const cells = document.querySelectorAll(".cell");
-const endMessage = document.getElementById("endMessage");
 const players = ["X", "O"];
 let currentPlayer = players[0];
 
-endMessage.textContent = `${currentPlayer}'s turn!`
+endMessage.textContent = `${currentPlayer}'s turn!`;
 
 for (const cell of cells) {
   cell.addEventListener("click", function () {
@@ -24,19 +26,33 @@ for (const cell of cells) {
       return;
     }
     cell.textContent = currentPlayer;
+    if (cell.textContent === "X") {
+      cell.classList.add("x-cell");
+    } else {
+      cell.classList.add("o-cell");
+    }
 
     if (checkWin(currentPlayer)) {
       endMessage.textContent = `Game over! ${currentPlayer} wins!`;
+      setTimeout(() => {
+        updateWinScore(currentPlayer);
+        console.log(playersScore);
+        restartGame();
+      }, 2000);
       return;
     }
 
     if (checkTie()) {
       endMessage.textContent = `Game is tied!`;
+      setTimeout(() => {
+        console.log(playersScore);
+        updateDrawScore();
+        restartGame();
+      }, 2000);
       return;
     }
 
     currentPlayer = currentPlayer === players[0] ? players[1] : players[0];
-
     if (currentPlayer == players[0]) {
       endMessage.textContent = `${players[0]}'s turn!`;
     } else {
@@ -61,28 +77,27 @@ function checkWin(currentPlayer) {
 
 function checkTie() {
   for (let i = 0; i < cells.length; i++) {
-    if (cells[i].textContent === "") {
+    if (cells[i].textContent.trim() === "") {
       return false;
     }
   }
   return true;
 }
 
-function restartGame(){
+function restartGame() {
   for (const cell of cells) {
     cell.textContent = "";
+    cell.classList.remove("x-cell", "o-cell");
   }
   currentPlayer = players[0];
   endMessage.textContent = `${currentPlayer}'s turn!`;
 }
 
+restartButton.addEventListener("click", restartGame);
 
-const restartButton = document.getElementById("restartButton");
+resetScoreButton.addEventListener("click", resetScore);
 
-restartButton.addEventListener("click",function(){
-  for (const cell of cells) {
-    cell.textContent = "";
-  }
-  currentPlayer = players[0];
-  endMessage.textContent = `${currentPlayer}'s turn!`;
-});
+startNewgameButton.addEventListener("click", showNewGameScreen);
+
+mainMenuButton.addEventListener("click", showMainMenuScreen);
+

@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+@import url(./font.css);
 
 * {
   padding: 0;
@@ -7,18 +8,136 @@
 }
 
 :root {
-  --board-width: 200px;
+  --board-width: 300px;
   --hand-font: "Permanent Marker", cursive;
   --roboto-font: "Roboto", sans-serif;
   --white: #ffffff;
   --grey-1: #e3e3e3;
+  --grey-2: #adadad;
   --blue: #46a3ff;
   --red: #ff827e;
   --black: #000000;
 }
 
+/* text align */
+.text-center {
+  text-align: center;
+}
+
+.text-start {
+  text-align: left;
+}
+
+.text-end {
+  text-align: right;
+}
+
+/* margins */
+.mb-10 {
+  margin-bottom: 10px;
+}
+
+.mb-20 {
+  margin-bottom: 20px;
+}
+
+.mb-30 {
+  margin-bottom: 30px;
+}
+
+.mb-40 {
+  margin-bottom: 40px;
+}
+
+.mb-50 {
+  margin-bottom: 50px;
+}
+
+.mb-100 {
+  margin-bottom: 100px;
+}
+
+/* font weights */
+.heading.typ-300,
+.para.typ-300 {
+  font-weight: 300;
+}
+
+.heading.typ-400,
+.para.typ-400 {
+  font-weight: 400;
+}
+
+.heading.typ-500,
+.para.typ-500 {
+  font-weight: 500;
+}
+
+.heading.typ-600,
+.para.typ-600 {
+  font-weight: 600;
+}
+
+.heading.typ-700,
+.para.typ-700 {
+  font-weight: 700;
+}
+
+.heading.typ-800,
+.para.typ-800 {
+  font-weight: 800;
+}
+
+.heading.typ-900,
+.para.typ-900 {
+  font-weight: 900;
+}
+
+.heading.typ-grey-2,
+.para.typ-grey-2 {
+  color: var(--grey-2);
+}
+
+.heading.typ-24 {
+  font-size: 24px;
+}
+
+.para.typ-18 {
+  font-size: 18px;
+}
+
+.para.typ-14 {
+  font-size: 14px;
+}
+
+.btn {
+  transition: 500ms ease all;
+  cursor: pointer;
+}
+
+.btn.typ-outline {
+  border: 1px solid var(--grey-1);
+  padding: 16px;
+  border-radius: 4px;
+  display: block;
+  width: 100%;
+  background-color: var(--white);
+}
+
+.btn.typ-outline .icon {
+  margin-right: 5px;
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 18px;
+}
+
+.players-turn {
+  color: var(--red);
+}
+
 body {
   background-color: var(--black);
+  font-family: var(--roboto-font);
 }
 
 #app {
@@ -27,17 +146,20 @@ body {
   min-width: 390px;
   width: 390px;
   margin: 0 auto;
+  padding: 24px;
 }
 
 .row {
   display: grid;
-  grid-template-columns: repeat(3, calc(var(--board-width) / 3));
-  grid-template-rows: repeat(3, calc(var(--board-width) / 3));
-  max-width: var(--board-width);
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  width: var(--board-width);
+  height: var(--board-width);
+  gap: 10px;
   font-family: var(--hand-font);
   font-size: calc(var(--board-width) / 4);
   line-height: 1;
-  grid-gap: 10px;
+  margin: 0 auto;
 }
 
 .cell {
@@ -46,4 +168,42 @@ body {
   align-items: center;
   justify-content: center;
   line-height: 1;
+}
+
+.cell.x-cell {
+  background-color: rgba(70, 163, 255, 0.2);
+  border-color: var(--blue);
+  color: var(--blue);
+}
+
+.cell.o-cell {
+  background-color: rgba(255, 130, 126, 0.2);
+  border-color: var(--red);
+  color: var(--red);
+}
+
+.scoreboard-wrapper {
+  display: flex;
+  background-color: var(--white);
+  justify-content: center;
+  align-items: center;
+  grid-gap: 50px;
+}
+
+.app-intro-wrapper,
+.home-wrapper,
+.game-wrapper {
+  display: none;
+}
+
+.app-intro-wrapper {
+  background-color: var(--white);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.app-intro-wrapper img {
+  max-width: 120px;
 }

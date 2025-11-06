@@ -18,6 +18,9 @@ export default {
     publicPath: "",
     clean: true,
   },
+  resolve: {    
+    extensions: [".js"]
+  },
   module: {
     rules: [
       {
