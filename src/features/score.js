@@ -1,17 +1,6 @@
 import { updateScoreUI } from "../ui/uiController";
-
-const playersScore = {
-  xPlayerScore: {
-    win: 0,
-    lose: 0,
-    draw: 0,
-  },
-  oPlayerScore: {
-    win: 0,
-    lose: 0,
-    draw: 0,
-  },
-};
+import { setLocal } from "../utils/storage";
+import { playersScore } from "../state/store";
 
 export function updateWinScore(player) {
   if (player === "X") {
@@ -21,18 +10,21 @@ export function updateWinScore(player) {
     playersScore.oPlayerScore.win++;
     playersScore.xPlayerScore.lose++;
   }
+  setLocal("playersScore", playersScore);
   updateScoreUI();
 }
 
 export function updateDrawScore() {
   playersScore.oPlayerScore.draw++;
   playersScore.xPlayerScore.draw++;
+  setLocal("playersScore", playersScore);
   updateScoreUI();
 }
 
 export function resetScore() {
   playersScore.xPlayerScore = { win: 0, lose: 0, draw: 0 };
   playersScore.oPlayerScore = { win: 0, lose: 0, draw: 0 };
+  setLocal("playersScore", playersScore);
   updateScoreUI();
 }
 

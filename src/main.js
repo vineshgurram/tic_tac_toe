@@ -1,8 +1,22 @@
 import "./assets/css/style.css";
-import { cells, mainMenuButton,endMessage,restartButton,resetScoreButton,startNewgameButton } from "./ui/uiElements";
-import { showNewGameScreen, showMainMenuScreen,showAppIntroScreen } from "./ui/uiController";
-import { resetScore,updateWinScore,updateDrawScore } from "./features/score";
-import { playersScore } from "./features/score";
+import {
+  cells,
+  mainMenuButton,
+  endMessage,
+  restartButton,
+  resetScoreButton,
+  startNewgameButton,
+} from "./ui/uiElements";
+import {
+  showNewGameScreen,
+  showMainMenuScreen,
+  showAppIntroScreen,
+  hideAppIntroScreen,
+} from "./ui/uiController";
+import { resetScore, updateWinScore, updateDrawScore } from "./features/score";
+
+const players = ["X", "O"];
+let currentPlayer = players[0];
 
 const winningCombination = [
   [0, 1, 2],
@@ -15,9 +29,6 @@ const winningCombination = [
   [2, 4, 6],
 ];
 
-const players = ["X", "O"];
-let currentPlayer = players[0];
-
 endMessage.textContent = `${currentPlayer}'s turn!`;
 
 for (const cell of cells) {
@@ -26,6 +37,7 @@ for (const cell of cells) {
       return;
     }
     cell.textContent = currentPlayer;
+
     if (cell.textContent === "X") {
       cell.classList.add("x-cell");
     } else {
@@ -34,21 +46,21 @@ for (const cell of cells) {
 
     if (checkWin(currentPlayer)) {
       endMessage.textContent = `Game over! ${currentPlayer} wins!`;
+      board.classList.add("no-click");
       setTimeout(() => {
         updateWinScore(currentPlayer);
-        console.log(playersScore);
         restartGame();
-      }, 2000);
+        document.querySelector(".board").classList.remove("no-click");
+      }, 3000);
       return;
     }
 
     if (checkTie()) {
       endMessage.textContent = `Game is tied!`;
       setTimeout(() => {
-        console.log(playersScore);
         updateDrawScore();
         restartGame();
-      }, 2000);
+      }, 3000);
       return;
     }
 
@@ -101,3 +113,11 @@ startNewgameButton.addEventListener("click", showNewGameScreen);
 
 mainMenuButton.addEventListener("click", showMainMenuScreen);
 
+window.addEventListener("DOMContentLoaded", () => {
+   showAppIntroScreen();
+   setTimeout(() => {
+    hideAppIntroScreen();
+   }, 2000);
+});
+
+export { winningCombination, cells };

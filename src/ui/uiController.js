@@ -10,12 +10,13 @@ export function showNewGameScreen() {
 export function showAppIntroScreen() {
   gameWrapper.style.display = "none";
   homeWrapper.style.display = "none";
-  appIntroWrapper.style.display = "block";
+  appIntroWrapper.style.display = "flex";
 }
 
 export function showMainMenuScreen() {
   gameWrapper.style.display = "none";
   homeWrapper.style.display = "block";
+  updateScoreUI();
 }
 
 export function updateScoreUI() {
@@ -27,3 +28,13 @@ export function updateScoreUI() {
   oLossScoreElement.textContent = playersScore.oPlayerScore.lose;
   oDrawScoreElement.textContent = playersScore.oPlayerScore.draw;
 }
+
+
+export function hideAppIntroScreen() {
+  gameWrapper.style.display = "none";
+  homeWrapper.style.display = "block";
+  appIntroWrapper.remove();
+  updateScoreUI();
+}
+
+console.log(playersScore)
