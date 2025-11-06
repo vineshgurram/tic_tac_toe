@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tic Tac Toe</title>
+  <script defer src="main.js"></script></head>
+
+  <body>
+    <div id="app">
+      <div id="game-wrapper" class="game-wrapper">
+        <h3
+          id="endMessage"
+          class="heading typ-24 typ-500 text-center mb-50"></h3>
+        <div class="board mb-50" id="board">
+          <div class="row">
+            <div class="cell" id="cell-0" data-index="0"></div>
+            <div class="cell" id="cell-1" data-index="1"></div>
+            <div class="cell" id="cell-2" data-index="2"></div>
+            <div class="cell" id="cell-3" data-index="3"></div>
+            <div class="cell" id="cell-4" data-index="4"></div>
+            <div class="cell" id="cell-5" data-index="5"></div>
+            <div class="cell" id="cell-6" data-index="6"></div>
+            <div class="cell" id="cell-7" data-index="7"></div>
+            <div class="cell" id="cell-8" data-index="8"></div>
+          </div>
+        </div>
+        <button id="restartButton" type="button" class="btn typ-outline mb-10">
+          <span class="icon icon-load"></span>
+          Play Again
+        </button>
+        <button id="mainMenuButton" type="button" class="btn typ-outline">
+          Main Menu
+        </button>
+      </div>
+      <div id="home-wrapper" class="home-wrapper">
+        <div class="text-center mb-50">
+          <p class="para typ-18 typ-400">Tic-Tac-Toe</p>
+          <!-- <h3 class="heading typ-24 typ-700">Your Game Begins Now</h3> -->
+        </div>
+        <div class="text-center mb-50">
+          <div class="player-scoreboard-wrapper mb-50">
+            <h2 class="heading typ-24 typ-700 mb-30">X's Score Board</h2>
+            <div class="scoreboard-wrapper">
+              <div class="score-box">
+                <h3 class="heading typ-24 typ-700" id="xWinScore">0</h3>
+                <p class="para typ-14 typ-400 typ-grey-2">Wins</p>
+              </div>
+              <div class="score-box">
+                <h3 class="heading typ-24 typ-700" id="xLossScore">0</h3>
+                <p class="para typ-14 typ-400 typ-grey-2">Losses</p>
+              </div>
+              <div class="score-box">
+                <h3 class="heading typ-24 typ-700" id="xDrawScore">0</h3>
+                <p class="para typ-14 typ-400 typ-grey-2">Draws</p>
+              </div>
+            </div>
+          </div>
+          <div class="player-scoreboard-wrapper">
+            <h2 class="heading typ-24 typ-700 mb-30">O's Score Board</h2>
+            <div class="scoreboard-wrapper">
+              <div class="score-box">
+                <h3 class="heading typ-24 typ-700" id="oWinScore">0</h3>
+                <p class="para typ-14 typ-400 typ-grey-2">Wins</p>
+              </div>
+              <div class="score-box">
+                <h3 class="heading typ-24 typ-700" id="oLossScore">0</h3>
+                <p class="para typ-14 typ-400 typ-grey-2">Losses</p>
+              </div>
+              <div class="score-box">
+                <h3 class="heading typ-24 typ-700" id="oDrawScore">0</h3>
+                <p class="para typ-14 typ-400 typ-grey-2">Draws</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="start-game-wrapper">
+          <button id="startNewgameButton" type="button" class="btn typ-outline mb-10">
+            Start New Game
+          </button>
+          <button id="resetScoreButton" type="button" class="btn typ-outline">
+            Reset Score
+          </button>
+        </div>
+      </div>
+      <div id="app-intro-wrapper" class="app-intro-wrapper">
+        <div class="intro-img">
+          <img src="images/logo.svg" alt="intro" />
+        </div>
+      </div>
+      <!-- <div id="app-login-wrapper" class="app-login-wrapper" >
+        <div class="intro-img mb-100">
+          <img src="images/logo.svg" alt="intro" />
+        </div>
+        <div class="text-center">
+          <h2 class="heading typ-24 typ-700 mb-10">Welcome</h2>
+          <p class="para typ-16 typ-grey-2 mb-40">Enter your name to continue.</p>
+          <form>
+            <div class="input-box">
+              <input type="text" class="input-field" placeholder="John Wick" id="userName">
+              <button class="btn"><span class="icon icon-forward"></span></button>
+            </div>
+          </form>
+        </div>
+      </div> -->
+    </div>
+  </body>
+</html>
